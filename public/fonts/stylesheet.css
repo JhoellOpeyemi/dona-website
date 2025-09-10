@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "DM Serif Display Italic";
+  src: url("dmserifdisplay-italic-webfont.woff2") format("woff2"),
+    url("dmserifdisplay-italic-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "DM Serif Display";
+  src: url("/assets/fonts/dmserifdisplay-regular-webfont.woff2") format("woff2"),
+    url("/assets/fonts/dmserifdisplay-regular-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}

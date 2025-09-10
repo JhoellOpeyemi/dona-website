@@ -1,0 +1,118 @@
+.portfolio-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--light-bg-color);
+  display: flex;
+  align-items: flex-end;
+  padding: 0 0 0.5rem 0;
+}
+
+.portfolio-section .container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5rem;
+}
+
+.image-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 45%;
+}
+
+.main-image {
+  position: relative;
+  width: 100%;
+  height: min(70vh, 40.625rem);
+  overflow: hidden;
+}
+
+.main-image img {
+  /* object-position: center 0; */
+  position: absolute;
+  height: 100%;
+  inset: 0;
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+}
+
+.images-thumbnail-container {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.image-thumbnail {
+  width: 100%;
+  height: min(15vh, 9.375rem);
+}
+
+.image-thumbnail-btn {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border: 3px solid var(--light-bg-color);
+}
+
+.image-thumbnail-btn img {
+  transition: transform 300ms;
+  pointer-events: none;
+}
+
+.image-thumbnail-btn:hover img {
+  transform: scale(1.1);
+}
+
+.image-thumbnail-btn:focus-visible {
+  border-color: var(--sec-color);
+}
+
+.image-thumbnail-btn.selected {
+  border-color: var(--sec-color);
+}
+
+.image-thumbnail-btn.selected img {
+  transform: scale(1.1);
+}
+
+.image-tags {
+  width: 30%;
+  justify-items: flex-end;
+  overflow: hidden;
+}
+
+.tag-btn-container {
+  width: 100%;
+  text-align: right;
+  padding: 1rem 0;
+  border-top: 0.125rem solid var(--light-bg-color);
+  border-bottom: 0.125rem solid var(--light-bg-color);
+  transition: border 300ms ease-in;
+  overflow: hidden;
+}
+
+.tag-btn-container:has(> .tag-btn.selected) {
+  border-color: var(--dark);
+}
+
+.tag-btn {
+  color: var(--light-text-color);
+  font: var(--heading-four);
+  transition: color 300ms ease-in;
+  text-align: right;
+}
+
+.tag-btn.selected {
+  color: var(--text-color);
+}
+
+.tag-btn:hover {
+  color: var(--text-color);
+}
+
+.tag-btn:focus-visible {
+  color: var(--text-color);
+  outline: 0.125rem solid var(--sec-color);
+}

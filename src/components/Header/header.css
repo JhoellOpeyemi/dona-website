@@ -1,0 +1,60 @@
+.header {
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 75rem;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.logo {
+  text-transform: uppercase;
+  font: var(--text);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  position: relative;
+  font: var(--text);
+  color: var(--light-text-color);
+  transition: color 250ms ease-in;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 0.125rem;
+  background-color: var(--text-color);
+  transition: width 250ms ease-in;
+}
+
+.nav-link.active {
+  color: var(--text-color);
+}
+
+.nav-link.active::before {
+  width: 100%;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--text-color);
+}
+
+.nav-link:hover::before,
+.nav-link:focus::before {
+  width: 100%;
+}
