@@ -207,15 +207,12 @@ export const actionBtnClick = (
   actionIndex,
   setActionIndex
 ) => {
-  const tags = Array.from(document.querySelectorAll(".tag-btn"));
+  const tagBtns = Array.from(document.querySelectorAll(".tag-btn"));
   const thumbnails = gsap.utils.toArray(
     document.querySelectorAll(".image-thumbnail")
   );
   const imageTagsContainer = document.querySelector(".tag-btn-wrapper");
 
-  gsap.set(thumbnails, {
-    clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
-  });
 
   if (action == "next") {
     if (actionIndex === tags.length - 1) {
@@ -224,63 +221,71 @@ export const actionBtnClick = (
 
     setActionIndex((prev) => prev + 1);
 
-    tags.forEach((tag) => {
+    tagBtns.forEach((tag) => {
       tag.classList.remove("selected");
-      tags[actionIndex + 1].classList.add("selected");
+
+      tagBtns[actionIndex + 1].classList.add("selected");
 
       if (tag.classList.contains("selected")) {
         const splittedTag = tag.textContent.split(" ")[0].toLowerCase();
         setSelected(allImages[splittedTag]);
 
-        // get tag images and create image element to animate
-        const src = allImages[splittedTag][0].filename;
-        createImage(elementRef.current, src, "tag");
+        if (allImages[splittedTag] !== undefined) {
+          // get tag images and create image element to animate
+          const src = allImages[splittedTag][0].filename;
+          createImage(elementRef.current, src, "tag");
+
+          // move the tags container to the left
+            gsap.to(imageTagsContainer, {
+            x: `-=${100 / tags.length}%`,
+            duration: 0.75,
+            });
+
+            gsap.to(thumbnails, {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            ease: "power3.out",
+            duration: 0.75,
+            stagger: { each: 0.1, from: "start" },
+            });
+        }
       }
     });
 
-    // move the tags container to the left
-    gsap.to(imageTagsContainer, {
-      x: `-=${100 / tags.length}%`,
-      duration: 0.75,
-    });
-
-    gsap.to(thumbnails, {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      ease: "power3.out",
-      duration: 0.75,
-      stagger: { each: 0.1, from: "start" },
-    });
+    
   } else if (action == "prev") {
     if (actionIndex === 0) {
       return;
     }
 
     setActionIndex((prev) => prev - 1);
-    tags.forEach((tag) => {
+
+    tagBtns.forEach((tag) => {
       tag.classList.remove("selected");
-      tags[actionIndex - 1].classList.add("selected");
+      tagBtns[actionIndex - 1].classList.add("selected");
 
       if (tag.classList.contains("selected")) {
         const splittedTag = tag.textContent.split(" ")[0].toLowerCase();
         setSelected(allImages[splittedTag]);
 
-        // get tag images and create image element to animate
-        const src = allImages[splittedTag][0].filename;
-        createImage(elementRef.current, src, "tag");
+        if (allImages[splittedTag] !== undefined) {
+          // get tag images and create image element to animate
+          const src = allImages[splittedTag][0].filename;
+          createImage(elementRef.current, src, "tag");
+
+          // move the tags container to the right
+          gsap.to(imageTagsContainer, {
+            x: `+=${100 / tags.length}%`,
+            duration: 0.75,
+          });
+
+          gsap.to(thumbnails, {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            ease: "power3.out",
+            duration: 0.75,
+            stagger: { each: 0.1, from: "start" },
+          });
+        }
       }
-    });
-
-    // move the tags container to the right
-    gsap.to(imageTagsContainer, {
-      x: `+=${100 / tags.length}%`,
-      duration: 0.75,
-    });
-
-    gsap.to(thumbnails, {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      ease: "power3.out",
-      duration: 0.75,
-      stagger: { each: 0.1, from: "start" },
     });
   }
 };

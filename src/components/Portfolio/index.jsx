@@ -61,15 +61,13 @@ const Portfolio = () => {
   }, [selected]);
 
   useEffect(() => {
-    if (viewport > 768) {
       if (selected !== undefined && initial) {
-        portfolioScroll(scrollTl, portfolioRef, setInitial);
+        if(viewport > 768){
+            portfolioScroll(scrollTl, portfolioRef, setInitial);
+        } else {
+            mobilePortfolioScroll(scrollTl, portfolioRef, setInitial);
+        }
       }
-    } else {
-      if (selected !== undefined && initial) {
-        mobilePortfolioScroll(scrollTl, portfolioRef, setInitial);
-      }
-    }
   }, [selected]);
 
   useEffect(() => {
