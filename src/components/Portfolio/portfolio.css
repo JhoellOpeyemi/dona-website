@@ -59,7 +59,7 @@
 
 .images-thumbnail-container {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.2rem;
   width: 100%;
 }
 
@@ -201,8 +201,10 @@
   }
 
   .action-btn {
-    color: var(--light-text-color);
-    font: var(--heading-four);
+    color: var(--text-color);
+    font: var(--large-text);
+    font-weight: 600;
+    font-size: 2rem;
     background: var(--light-bg-color);
     padding: 0.5rem;
     pointer-events: all;

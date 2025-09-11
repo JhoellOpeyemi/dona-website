@@ -1,6 +1,6 @@
 .mobile-menu-container {
   position: fixed;
-  top: 2rem;
+  top: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
@@ -42,12 +42,8 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 768px) {
-  .mobile-menu-container {
-    top: 1rem;
-  }
-
-  .mobile-menu-container .time {
+ .mobile-menu-container .time {
     opacity: 0.5;
   }
-}
+
+

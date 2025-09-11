@@ -16,9 +16,13 @@ const Nav = () => {
   const navRef = useRef();
   const tl = useRef();
 
-  const handleNav = () => {
+  const handleNav = (path = 'home') => {
     gsap.to(".menu", { opacity: 1, visibility: "visible" });
     setClicked((prev) => prev + 1);
+
+    if(path == 'home'){
+        window.scrollTo(0,0)
+    }
     setNav(!nav);
   };
 
@@ -43,14 +47,6 @@ const Nav = () => {
       }
     });
   });
-
-  //   useEffect(() => {
-  //     if (nav) {
-  //       document.body.classList.add("no-scroll");
-  //     } else {
-  //       document.body.classList.remove("no-scroll");
-  //     }
-  //   }, [nav]);
 
   useGSAP(() => {
     const navLinks = gsap.utils.toArray(".sticky-nav-link");
@@ -87,19 +83,19 @@ const Nav = () => {
     <div className="sticky-nav-container" ref={navRef}>
       <nav className={nav ? "sticky-nav active" : "sticky-nav"}>
         <div className="container">
-          <a href="/" className="sticky-nav-link active">
+          <a href="#home" className="sticky-nav-link active" onClick={() => handleNav('home')}>
             Home
           </a>
-          <a href="#about" className="sticky-nav-link">
+          <a href="#about" className="sticky-nav-link" onClick={handleNav}>
             About
           </a>
-          <a href="#portfolio" className="sticky-nav-link">
+          <a href="#portfolio" className="sticky-nav-link" onClick={handleNav}>
             Portfolio
           </a>
-          <a href="#comp-card" className="sticky-nav-link">
+          <a href="#comp-card" className="sticky-nav-link" onClick={handleNav}>
             Comp Card
           </a>
-          <a href="#contact" className="sticky-nav-link contact">
+          <a href="#contact" className="sticky-nav-link contact" onClick={handleNav}>
             Contact
           </a>
         </div>

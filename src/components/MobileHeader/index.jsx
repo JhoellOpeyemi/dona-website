@@ -16,19 +16,15 @@ const MobileHeader = () => {
   const navRef = useRef();
   const tl = useRef();
 
-  const handleNav = () => {
-    gsap.to(".mobile-menu", { opacity: 1, visibility: "visible" });
+  const handleNav = (path = 'home') => {
+    gsap.to(".menu", { opacity: 1, visibility: "visible" });
     setClicked((prev) => prev + 1);
+
+    if(path == 'home'){
+        window.scrollTo(0,0)
+    }
     setNav(!nav);
   };
-
-  //   useEffect(() => {
-  //     if (nav) {
-  //       document.body.classList.add("no-scroll");
-  //     } else {
-  //       document.body.classList.remove("no-scroll");
-  //     }
-  //   }, [nav]);
 
   useGSAP(() => {
     const navLinks = gsap.utils.toArray(".mobile-nav-link");
@@ -67,19 +63,19 @@ const MobileHeader = () => {
     <div className="mobile-nav-container" ref={navRef}>
       <nav className={nav ? "mobile-nav active" : "mobile-nav"}>
         <div className="container">
-          <a href="/" className="mobile-nav-link active">
+          <a href="#home" className="mobile-nav-link active" onClick={() => handleNav('hone')}>
             Home
           </a>
-          <a href="#about" className="mobile-nav-link">
+          <a href="#about" className="mobile-nav-link" onClick={handleNav}>
             About
           </a>
-          <a href="#portfolio" className="mobile-nav-link">
+          <a href="#portfolio" className="mobile-nav-link" onClick={handleNav}>
             Portfolio
           </a>
-          <a href="#comp-card" className="mobile-nav-link">
+          <a href="#comp-card" className="mobile-nav-link" onClick={handleNav}>
             Comp Card
           </a>
-          <a href="#contact" className="mobile-nav-link contact">
+          <a href="#contact" className="mobile-nav-link contact" onClick={handleNav}>
             Contact
           </a>
         </div>

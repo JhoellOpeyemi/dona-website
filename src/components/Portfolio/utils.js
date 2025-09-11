@@ -112,7 +112,7 @@ export const portfolioScroll = (tl, ref, setInitial) => {
     .timeline({
       scrollTrigger: {
         trigger: ref.current,
-        start: "top 30%",
+        start: "clamp(top 30%)",
       },
       onComplete: () => setInitial(false),
     })
@@ -162,7 +162,7 @@ export const mobilePortfolioScroll = (tl, ref, setInitial) => {
     .timeline({
       scrollTrigger: {
         trigger: ref.current,
-        start: "top 30%",
+        start: "clamp(top 30%)",
       },
       onComplete: () => setInitial(false),
     })
@@ -237,7 +237,7 @@ export const actionBtnClick = (
 
           // move the tags container to the left
             gsap.to(imageTagsContainer, {
-            x: `-=${100 / tags.length}%`,
+            x: '-=130px',
             duration: 0.75,
             });
 
@@ -274,7 +274,7 @@ export const actionBtnClick = (
 
           // move the tags container to the right
           gsap.to(imageTagsContainer, {
-            x: `+=${100 / tags.length}%`,
+            x: '+=130px',
             duration: 0.75,
           });
 
