@@ -30,9 +30,9 @@ const About = () => {
   }, [{ scope: aboutRef.current }]);
 
   return (
-    <section id="about" className="about-section" ref={aboutRef}>
+    <section className="about-section" ref={aboutRef}>
       <div className="container">
-        <div className="about-heading">
+        <div className="about-heading" id="about">
           <h2 className="section-heading">About</h2>
         </div>
 

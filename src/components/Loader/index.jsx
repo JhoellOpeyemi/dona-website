@@ -1,5 +1,5 @@
 // hooks import
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -8,27 +8,22 @@ import "./loader.css";
 
 gsap.registerPlugin(useGSAP);
 
-const Loader = ({ countDelay, setIsLoading }) => {
-  const [count, setCount] = useState(0);
+const Loader = ({ setIsLoading }) => {
   const loaderRef = useRef();
   const tl = useRef();
 
   const percentages = [0, 19, 35, 60, 83, 92, 100];
 
-  const updateCounter = () => {
-    percentages.forEach((percentage, index) => {
-      setTimeout(() => {
-        setCount(percentage);
-      }, index * countDelay);
-    });
-  };
-
-  useEffect(() => {
-    updateCounter();
-  }, []);
+  useEffect(() => {}, []);
 
   useGSAP(() => {
     let mm = gsap.matchMedia();
+
+    const spanHeight = document.querySelector(
+      ".number-container span"
+    ).offsetHeight;
+
+    gsap.set(".loader-counter", { height: spanHeight });
 
     mm.add(
       { isMobile: "(max-width: 768px)", isDesktop: "(min-width: 769px)" },
@@ -38,7 +33,19 @@ const Loader = ({ countDelay, setIsLoading }) => {
         if (isDesktop) {
           tl.current = gsap
             .timeline({ onComplete: () => setIsLoading(false) })
-            .to(".loader-counter", { opacity: 0 }, "+=3.2")
+            .to(
+              ".number-container",
+              { y: `-${(percentages.length - 1) * 100}%`, duration: 4 },
+              "+=1"
+            )
+            .to(
+              [".loader-text", ".loader-counter"],
+              {
+                opacity: 0,
+                duration: 0.75,
+              },
+              "+=0.5"
+            )
             .to(".loader-container", {
               y: "-100%",
               visibility: "hidden",
@@ -48,7 +55,19 @@ const Loader = ({ countDelay, setIsLoading }) => {
         } else if (isMobile) {
           tl.current = gsap
             .timeline({ onComplete: () => setIsLoading(false) })
-            .to(".loader-counter", { opacity: 0 }, "+=3.2")
+            .to(
+              ".number-container",
+              { y: `-${(percentages.length - 1) * 100}%`, duration: 4 },
+              "+=1"
+            )
+            .to(
+              [".loader-text", ".loader-counter"],
+              {
+                opacity: 0,
+                duration: 0.75,
+              },
+              "+=0.5"
+            )
             .to(".loader-container", {
               y: "-100%",
               visibility: "hidden",
@@ -63,7 +82,18 @@ const Loader = ({ countDelay, setIsLoading }) => {
 
   return (
     <div className="loader-container" ref={loaderRef}>
-      <h2 className="loader-counter">{count}%</h2>
+      <div className="container">
+        <h2 className="loader-text">Dona</h2>
+
+        <h2 className="loader-counter">
+          <span className="number-container">
+            {percentages.map((percentage, index) => (
+              <span key={index}>{percentage}</span>
+            ))}
+          </span>
+          <span className="sign">%</span>
+        </h2>
+      </div>
     </div>
   );
 };

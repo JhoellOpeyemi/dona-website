@@ -16,12 +16,12 @@ const Nav = () => {
   const navRef = useRef();
   const tl = useRef();
 
-  const handleNav = (path = 'home') => {
+  const handleNav = (path = "home") => {
     gsap.to(".menu", { opacity: 1, visibility: "visible" });
     setClicked((prev) => prev + 1);
 
-    if(path == 'home'){
-        window.scrollTo(0,0)
+    if (path == "home") {
+      window.scrollTo(0, 0);
     }
     setNav(!nav);
   };
@@ -31,15 +31,21 @@ const Nav = () => {
     const menuContainer = document.querySelector(".menu-container");
 
     window.addEventListener("scroll", () => {
-      const vh = window.innerHeight;
+      const vh = window.innerHeight - window.innerHeight * 0.1;
       const scrollY = window.scrollY;
 
       if (scrollY >= vh) {
         gsap.to(menuContainer, { display: "flex" });
-        gsap.to(menu, { opacity: 1, visibility: "visible", duration: 0.75 });
+        gsap.to(menu, {
+          display: "inline-block",
+          opacity: 1,
+          visibility: "visible",
+          duration: 0.75,
+        });
       } else {
         gsap.to(menuContainer, { display: "none" });
         gsap.to(menu, {
+          display: "none",
           opacity: 0,
           visibility: "hidden",
           duration: 0.75,
@@ -55,7 +61,12 @@ const Nav = () => {
 
     gsap.set(".sticky-nav", { y: "-100%" });
     gsap.set(".sticky-nav-link .char", { y: "100%" });
-    gsap.set(".menu", { color: "#222", opacity: 0, visibility: "hidden" });
+    gsap.set(".menu", {
+      color: "#222",
+      opacity: 0,
+      visibility: "hidden",
+      display: "none",
+    });
 
     tl.current = gsap
       .timeline({ paused: true })
@@ -64,7 +75,14 @@ const Nav = () => {
         duration: 0.75,
         ease: "power3.in",
       })
-      .to(".menu", { color: "#fbfbfb", duration: 0.75 }, "<")
+      .to(
+        ".menu",
+        {
+          color: "#fbfbfb",
+          duration: 0.75,
+        },
+        "<"
+      )
       .to(".sticky-nav-link .char", {
         y: 0,
         ease: "power3.out",
@@ -73,9 +91,11 @@ const Nav = () => {
 
     if (nav) {
       tl.current.play();
+      document.body.classList.add('no-scroll')
     }
     if (!nav && clicked > 0) {
       tl.current.reverse(0);
+      document.body.classList.remove('no-scroll')
     }
   }, [{ scope: navRef.current }]);
 
@@ -83,7 +103,11 @@ const Nav = () => {
     <div className="sticky-nav-container" ref={navRef}>
       <nav className={nav ? "sticky-nav active" : "sticky-nav"}>
         <div className="container">
-          <a href="#home" className="sticky-nav-link active" onClick={() => handleNav('home')}>
+          <a
+            href="#home"
+            className="sticky-nav-link active"
+            onClick={() => handleNav()}
+          >
             Home
           </a>
           <a href="#about" className="sticky-nav-link" onClick={handleNav}>
@@ -95,7 +119,11 @@ const Nav = () => {
           <a href="#comp-card" className="sticky-nav-link" onClick={handleNav}>
             Comp Card
           </a>
-          <a href="#contact" className="sticky-nav-link contact" onClick={handleNav}>
+          <a
+            href="#contact"
+            className="sticky-nav-link contact"
+            onClick={handleNav}
+          >
             Contact
           </a>
         </div>

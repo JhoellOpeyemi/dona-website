@@ -4,9 +4,9 @@ import "./header.css";
 const Header = () => {
   return (
     <header className="header">
-      <p className="time">12:30PM</p>
-
       <p className="logo">Dona</p>
+
+      <p className="time">12:30PM</p>
 
       <nav className="nav">
         <a href="/" className="nav-link active">

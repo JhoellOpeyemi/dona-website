@@ -1,5 +1,5 @@
 // hooks import
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -16,15 +16,29 @@ const MobileHeader = () => {
   const navRef = useRef();
   const tl = useRef();
 
-  const handleNav = (path = 'home') => {
+  const handleNav = (path = "home") => {
     gsap.to(".menu", { opacity: 1, visibility: "visible" });
     setClicked((prev) => prev + 1);
 
-    if(path == 'home'){
-        window.scrollTo(0,0)
+    if (path == "home") {
+      window.scrollTo(0, 0);
     }
     setNav(!nav);
   };
+
+  useEffect(() => {
+    const menuContainer = document.querySelector(".mobile-menu-container");
+
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+
+      if (scrollY >= 1) {
+        gsap.to(menuContainer, { pointerEvents: "none" });
+      } else {
+        gsap.to(menuContainer, { pointerEvents: "all" });
+      }
+    });
+  });
 
   useGSAP(() => {
     const navLinks = gsap.utils.toArray(".mobile-nav-link");
@@ -53,9 +67,11 @@ const MobileHeader = () => {
 
     if (nav) {
       tl.current.play();
+      document.body.classList.add("menu-open");
     }
     if (!nav && clicked > 0) {
       tl.current.reverse(0);
+      document.body.classList.remove("menu-open");
     }
   }, [{ scope: navRef.current }]);
 
@@ -63,7 +79,11 @@ const MobileHeader = () => {
     <div className="mobile-nav-container" ref={navRef}>
       <nav className={nav ? "mobile-nav active" : "mobile-nav"}>
         <div className="container">
-          <a href="#home" className="mobile-nav-link active" onClick={() => handleNav('hone')}>
+          <a
+            href="#home"
+            className="mobile-nav-link active"
+            onClick={() => handleNav("hone")}
+          >
             Home
           </a>
           <a href="#about" className="mobile-nav-link" onClick={handleNav}>
@@ -75,16 +95,20 @@ const MobileHeader = () => {
           <a href="#comp-card" className="mobile-nav-link" onClick={handleNav}>
             Comp Card
           </a>
-          <a href="#contact" className="mobile-nav-link contact" onClick={handleNav}>
+          <a
+            href="#contact"
+            className="mobile-nav-link contact"
+            onClick={handleNav}
+          >
             Contact
           </a>
         </div>
       </nav>
 
       <div className="mobile-menu-container">
-        <p className="time">12:30PM</p>
-
         <p className="logo">Dona</p>
+
+        <p className="time">12:30PM</p>
 
         <button className="mobile-menu" onClick={handleNav}>
           {nav ? "Close" : "Menu"}
