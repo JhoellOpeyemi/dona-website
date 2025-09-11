@@ -31,7 +31,7 @@ const Home = () => {
       .timeline({
         scrollTrigger: {
           trigger: homeABoutRef.current,
-          start: "top top",
+          start: 1,
           end: "bottom bottom",
           scrub: 2,
         },

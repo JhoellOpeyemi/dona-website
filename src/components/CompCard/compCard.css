@@ -6,6 +6,7 @@
   display: flex;
   align-items: flex-end;
   padding: 0 0 0.5rem 0;
+  overflow: hidden;
 }
 
 .comp-card-content {
@@ -141,8 +142,15 @@
     font: var(--text);
   }
 
+  .comp-card-details-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .comp-card-details-container ul {
     list-style: none;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,7 +167,7 @@
     flex-direction: column;
     gap: 0.5rem;
     width: 75%;
-    height: min(75vh, 33rem);
+    height: min(75vh, 43rem);
   }
 
   .card-main-image {
@@ -184,6 +192,5 @@
 
   .comp-card-images-container {
     width: 85%;
-    height: min(78vh, 34rem);
   }
 }

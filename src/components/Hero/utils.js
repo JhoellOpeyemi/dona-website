@@ -11,11 +11,15 @@ export const loading = (tl) => {
 
   tl.current = gsap
     .timeline()
-    .to(".hero-image-container", {
-      scale: 1,
-      duration: 1.2,
-      ease: "power4.out",
-    })
+    .to(
+      ".hero-image-container",
+      {
+        scale: 1,
+        duration: 1.2,
+        ease: "power4.out",
+      },
+      "+=0.5"
+    )
     .to(
       ".hero-image-container img",
       {

@@ -6,6 +6,7 @@
   z-index: 2;
   display: flex;
   align-items: flex-end;
+  overflow: hidden;
 }
 
 .about-section .container {
