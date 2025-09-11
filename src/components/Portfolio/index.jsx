@@ -19,6 +19,7 @@ import { splitText } from "../../utils";
 
 gsap.registerPlugin(useGSAP);
 const Portfolio = () => {
+  const [initial, setInitial] = useState(true);
   const [allImages, setAllImages] = useState({});
   const [selected, setSelected] = useState([]);
   const mainImageRef = useRef();
@@ -55,10 +56,10 @@ const Portfolio = () => {
   }, [selected]);
 
   useEffect(() => {
-    if (selected !== undefined) {
-      portfolioScroll(scrollTl, portfolioRef);
+    if (selected !== undefined && initial) {
+      portfolioScroll(scrollTl, portfolioRef, setInitial);
     }
-  }, []);
+  }, [selected]);
 
   useEffect(() => {
     // set the fist tag btn as selected
@@ -76,8 +77,10 @@ const Portfolio = () => {
       <div className="container">
         <div className="image-gallery">
           <div className="main-image" ref={mainImageRef}>
-            {selected !== undefined && (
+            {selected !== undefined ? (
               <img src={selected[0]?.filename} alt="" />
+            ) : (
+              <p className="image-loading-text">Loading Images...</p>
             )}
           </div>
 

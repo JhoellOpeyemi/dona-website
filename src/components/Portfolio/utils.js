@@ -98,7 +98,7 @@ const createImage = (element, src, type) => {
 };
 
 // reveal portfolio on scroll
-export const portfolioScroll = (tl, ref) => {
+export const portfolioScroll = (tl, ref, setInitial) => {
   gsap.set(".tag-btn .word", { y: "140%" });
   gsap.set(".tag-btn-container", { x: "100%" });
   gsap.set(".image-thumbnail", {
@@ -114,6 +114,7 @@ export const portfolioScroll = (tl, ref) => {
         trigger: ref.current,
         start: "top 30%",
       },
+      onComplete: () => setInitial(false),
     })
     .to(".main-image img", {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",

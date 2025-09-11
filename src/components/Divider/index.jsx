@@ -20,8 +20,8 @@ const Divider = ({ text }) => {
         .timeline({
           scrollTrigger: {
             trigger: divider,
-            start: "top 80%",
-            end: "bottom 10%",
+            start: "top 90%",
+            end: "bottom top",
             scrub: 2,
           },
         })

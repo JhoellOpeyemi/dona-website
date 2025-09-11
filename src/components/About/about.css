@@ -45,7 +45,7 @@
 
 .about-image-2 {
   width: 20%;
-  height: min(25vh, 12.5rem);
+  height: min(25vh, 13rem);
 }
 
 @media screen and (max-width: 768px) {
