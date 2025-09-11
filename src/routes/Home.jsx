@@ -16,7 +16,7 @@ import Divider from "../components/Divider";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const homeABoutRef = useRef();
   const tl = useRef();
 

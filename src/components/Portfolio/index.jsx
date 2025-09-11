@@ -9,7 +9,9 @@ import "./portfolio.css";
 
 // data import
 import {
+  actionBtnClick,
   portfolioScroll,
+  mobilePortfolioScroll,
   setInitialThumbnail,
   tagBtnClick,
   tags,
@@ -22,6 +24,7 @@ const Portfolio = () => {
   const [initial, setInitial] = useState(true);
   const [allImages, setAllImages] = useState({});
   const [selected, setSelected] = useState([]);
+  const [actionIndex, setActionIndex] = useState(0);
   const mainImageRef = useRef();
   const portfolioRef = useRef();
   const scrollTl = useRef();
@@ -29,6 +32,8 @@ const Portfolio = () => {
   const story = useStoryblok("portfolio", {
     version: "draft",
   });
+
+  const viewport = window.innerWidth;
 
   useEffect(() => {
     if (story !== undefined) {
@@ -56,8 +61,14 @@ const Portfolio = () => {
   }, [selected]);
 
   useEffect(() => {
-    if (selected !== undefined && initial) {
-      portfolioScroll(scrollTl, portfolioRef, setInitial);
+    if (viewport > 768) {
+      if (selected !== undefined && initial) {
+        portfolioScroll(scrollTl, portfolioRef, setInitial);
+      }
+    } else {
+      if (selected !== undefined && initial) {
+        mobilePortfolioScroll(scrollTl, portfolioRef, setInitial);
+      }
     }
   }, [selected]);
 
@@ -104,18 +115,74 @@ const Portfolio = () => {
         </div>
 
         <div className="image-tags">
-          {tags.map((tag, index) => (
-            <div className="tag-btn-container" key={index}>
+          {viewport <= 768 && (
+            <div className="action-btn-container">
               <button
-                className="tag-btn"
-                onClick={(e) =>
-                  tagBtnClick(e, tag, mainImageRef, setSelected, allImages)
+                className="prev-btn action-btn"
+                aria-label="Previous"
+                onClick={() =>
+                  actionBtnClick(
+                    "prev",
+                    mainImageRef,
+                    setSelected,
+                    allImages,
+                    actionIndex,
+                    setActionIndex
+                  )
                 }
               >
-                {tag}
+                &lt;
+              </button>
+              <button
+                className="next-btn action-btn"
+                aria-label="Next"
+                onClick={() =>
+                  actionBtnClick(
+                    "next",
+                    mainImageRef,
+                    setSelected,
+                    allImages,
+                    actionIndex,
+                    setActionIndex
+                  )
+                }
+              >
+                &gt;
               </button>
             </div>
-          ))}
+          )}
+          <div className="tag-btn-wrapper">
+            {viewport <= 768 ? (
+              <>
+                {tags.map((tag, index) => (
+                  <div className="tag-btn-container" key={index}>
+                    <p className="tag-btn">{tag}</p>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>
+                {tags.map((tag, index) => (
+                  <div className="tag-btn-container" key={index}>
+                    <button
+                      className="tag-btn"
+                      onClick={(e) =>
+                        tagBtnClick(
+                          e,
+                          tag,
+                          mainImageRef,
+                          setSelected,
+                          allImages
+                        )
+                      }
+                    >
+                      {tag}
+                    </button>
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -98,9 +98,14 @@
 }
 
 .image-tags {
+  position: relative;
   width: 30%;
   justify-items: flex-end;
   overflow: hidden;
+}
+
+.tag-btn-wrapper {
+  width: 100%;
 }
 
 .tag-btn-container {
@@ -152,7 +157,7 @@
 
   .image-gallery {
     gap: 0.5rem;
-    width: 80%;
+    width: 70%;
   }
 
   .main-image {
@@ -164,16 +169,48 @@
   }
 
   .image-tags {
+    position: relative;
+    width: 100%;
+    justify-items: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 0 0 0.75rem 0;
+  }
+
+  .tag-btn-wrapper {
     display: flex;
     width: 100%;
     align-items: center;
     justify-items: center;
-    overflow-x: scroll;
-    padding-bottom: 0.75rem;
+    padding: 0 0 0 2.5rem;
   }
 
   .image-tags::-webkit-scrollbar {
     height: 0;
+  }
+
+  .action-btn-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .action-btn {
+    color: var(--light-text-color);
+    font: var(--heading-four);
+    background: var(--light-bg-color);
+    padding: 0.5rem;
+    pointer-events: all;
+    transition: color 300ms ease-in;
+  }
+
+  .action-btn:hover {
+    color: var(--text-color);
   }
 
   .tag-btn-container {
@@ -185,12 +222,17 @@
     border-bottom: 0;
     border-left: 0.125rem solid var(--light-bg-color);
     border-right: 0.125rem solid var(--light-bg-color);
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 
   .tag-btn {
     font: var(--large-text);
+    font-size: 1rem;
     white-space: nowrap;
+  }
+
+  .tag-btn:hover {
+    color: var(--light-text-color);
   }
 }
 

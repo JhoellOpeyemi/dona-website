@@ -147,3 +147,140 @@ export const portfolioScroll = (tl, ref, setInitial) => {
       },
     });
 };
+
+export const mobilePortfolioScroll = (tl, ref, setInitial) => {
+  gsap.set(".tag-btn .word", { opacity: 0 });
+  gsap.set(".tag-btn-container", { opacity: 0, y: "100%" });
+  gsap.set(".image-thumbnail", {
+    clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+  });
+  gsap.set(".main-image img", {
+    clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+  });
+
+  tl.current = gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: ref.current,
+        start: "top 30%",
+      },
+      onComplete: () => setInitial(false),
+    })
+    .to(".main-image img", {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      duration: 1,
+      ease: "power3.out",
+    })
+    .to(
+      ".image-thumbnail",
+      {
+        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        ease: "power3.out",
+        duration: 0.75,
+        stagger: { each: 0.1, from: "start" },
+      },
+      "<"
+    )
+    .to(
+      ".tag-btn-container",
+      {
+        opacity: 1,
+        y: 0,
+      },
+      "<"
+    )
+    .to(".tag-btn .word", {
+      opacity: 1,
+      duration: 0.75,
+      ease: "power3.out",
+      stagger: {
+        from: "start",
+      },
+    });
+};
+
+export const actionBtnClick = (
+  action,
+  elementRef,
+  setSelected,
+  allImages,
+  actionIndex,
+  setActionIndex
+) => {
+  const tags = Array.from(document.querySelectorAll(".tag-btn"));
+  const thumbnails = gsap.utils.toArray(
+    document.querySelectorAll(".image-thumbnail")
+  );
+  const imageTagsContainer = document.querySelector(".tag-btn-wrapper");
+
+  gsap.set(thumbnails, {
+    clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+  });
+
+  if (action == "next") {
+    if (actionIndex === tags.length - 1) {
+      return;
+    }
+
+    setActionIndex((prev) => prev + 1);
+
+    tags.forEach((tag) => {
+      tag.classList.remove("selected");
+      tags[actionIndex + 1].classList.add("selected");
+
+      if (tag.classList.contains("selected")) {
+        const splittedTag = tag.textContent.split(" ")[0].toLowerCase();
+        setSelected(allImages[splittedTag]);
+
+        // get tag images and create image element to animate
+        const src = allImages[splittedTag][0].filename;
+        createImage(elementRef.current, src, "tag");
+      }
+    });
+
+    // move the tags container to the left
+    gsap.to(imageTagsContainer, {
+      x: `-=${100 / tags.length}%`,
+      duration: 0.75,
+    });
+
+    gsap.to(thumbnails, {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      ease: "power3.out",
+      duration: 0.75,
+      stagger: { each: 0.1, from: "start" },
+    });
+  } else if (action == "prev") {
+    if (actionIndex === 0) {
+      return;
+    }
+
+    setActionIndex((prev) => prev - 1);
+    tags.forEach((tag) => {
+      tag.classList.remove("selected");
+      tags[actionIndex - 1].classList.add("selected");
+
+      if (tag.classList.contains("selected")) {
+        const splittedTag = tag.textContent.split(" ")[0].toLowerCase();
+        setSelected(allImages[splittedTag]);
+
+        // get tag images and create image element to animate
+        const src = allImages[splittedTag][0].filename;
+        createImage(elementRef.current, src, "tag");
+      }
+    });
+
+    // move the tags container to the right
+    gsap.to(imageTagsContainer, {
+      x: `+=${100 / tags.length}%`,
+      duration: 0.75,
+    });
+
+    gsap.to(thumbnails, {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      ease: "power3.out",
+      duration: 0.75,
+      stagger: { each: 0.1, from: "start" },
+    });
+  }
+};
