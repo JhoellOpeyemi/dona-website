@@ -21,6 +21,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
+  height: 100svh;
   background: var(--dark);
   z-index: 6;
   transform: translateY(-100%);
@@ -42,8 +43,6 @@
   overflow: hidden;
 }
 
- .mobile-menu-container .time {
-    opacity: 0.5;
-  }
-
-
+.mobile-menu-container .time {
+  opacity: 0.5;
+}

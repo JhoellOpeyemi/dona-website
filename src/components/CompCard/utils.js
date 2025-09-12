@@ -8,12 +8,13 @@ export const cardScroll = (tl, ref) => {
   gsap.set(".card-thumbnail", {
     clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
   });
+  gsap.set(".comp-card-details-container", { opacity: 0 });
 
   tl.current = gsap
     .timeline({
       scrollTrigger: {
         trigger: ref.current,
-        start: "top 30%",
+        start: "clamp(top 30%)",
       },
     })
     .to(".card-main-image img", {
@@ -28,33 +29,24 @@ export const cardScroll = (tl, ref) => {
       stagger: { each: 0.1, from: "start" },
     })
     .to(".comp-card-details-container", {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      duration: 0.1,
-      ease: "power4.out",
-    })
-    .to(".comp-card-details-container li", {
-      x: 0,
-      stagger: { each: 0.05, from: "start" },
-    })
-    .to(".comp-card-details-container li span", {
       opacity: 1,
-      stagger: { each: 0.05, from: "start" },
+      duration: 0.75,
     });
 };
 
-export const mobileCardScroll = (tl, ref) => {
+export const mobileCardScroll = (tl, ref, setMobileScrollDone) => {
   gsap.set(".card-thumbnail", {
     clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
   });
-  gsap.set(".comp-card-details-container li", { opacity: 0 });
   gsap.set(".details-btn-container", { opacity: 0 });
 
   tl.current = gsap
     .timeline({
       scrollTrigger: {
         trigger: ref.current,
-        start: "top 30%",
+        start: "clamp(top 30%)",
       },
+      onComplete: () => setMobileScrollDone(true),
     })
     .to(".card-main-image img", {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
@@ -67,8 +59,7 @@ export const mobileCardScroll = (tl, ref) => {
       duration: 0.75,
       stagger: { each: 0.1, from: "start" },
     })
-    .to(".comp-card-details-container li", { opacity: 1 }, "<")
-    .to(".details-btn-container", { opacity: 1 });
+    .to(".details-btn-container", { opacity: 1 }, "<");
 };
 
 // changes the main image based on the thumbnail selected

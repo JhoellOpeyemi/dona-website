@@ -22,6 +22,8 @@ gsap.registerPlugin(useGSAP);
 
 const CompCard = () => {
   const [stats, setStats] = useState(false);
+  const [mobileScrollDone, setMobileScrollDone] = useState(false);
+  const [clicked, setClicked] = useState(0);
   const cardRef = useRef();
   const cardImageRef = useRef();
   const scrollTl = useRef();
@@ -30,6 +32,7 @@ const CompCard = () => {
   const viewport = window.innerWidth;
 
   const handleStats = () => {
+    setClicked((prev) => prev + 1);
     setStats(!stats);
   };
 
@@ -46,45 +49,48 @@ const CompCard = () => {
         if (isDesktop) {
           cardScroll(scrollTl, cardRef);
         } else if (isMobile) {
-          mobileCardScroll(scrollTl, cardRef);
+          mobileCardScroll(scrollTl, cardRef, setMobileScrollDone);
         }
       }
     );
   }, []);
 
   useGSAP(() => {
-    gsap.set(".comp-card-details-container", {
-      clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
-    });
-    gsap.set(".comp-card-details-container li", { x: "-110%" });
-    gsap.set(".comp-card-details-container li span", { opacity: 0 });
+    if (mobileScrollDone && clicked > 0) {
+      gsap.set(".comp-card-details-container", {
+        clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+      });
+      gsap.set(".comp-card-details-container li", { x: "-110%" });
+      gsap.set(".comp-card-details-container li span", { opacity: 0 });
 
-    statsTl.current = gsap
-      .timeline({ paused: true })
-      .to(".comp-card-details-container", {
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-        duration: 0.75,
-        ease: "power4.out",
-      })
-      .to(".comp-card-details-container li", {
-        x: 0,
-        duration: 0.5,
-        stagger: { each: 0.05, from: "start" },
-      })
-      .to(
-        ".comp-card-details-container li span",
-        {
-          opacity: 1,
-          stagger: { each: 0.05, from: "start" },
-        },
-        "<+0.4"
-      );
+      statsTl.current = gsap
+        .timeline({ paused: true })
+        .to(".comp-card-details-container", {
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+          duration: 0.75,
+          ease: "power4.out",
+        })
+        .to(".comp-card-details-container li", {
+          x: 0,
+          duration: 0.4,
+          //   stagger: { each: 0.05, from: "start" },
+        })
+        .to(
+          ".comp-card-details-container li span",
+          {
+            opacity: 1,
+            duration: 0.4,
+            stagger: { each: 0.05, from: "start" },
+          },
+          "<+0.4"
+        );
 
-    if (stats) {
-      statsTl.current.play();
-    }
-    if (!stats) {
-      statsTl.current.reverse(0);
+      if (stats) {
+        statsTl.current.play();
+      }
+      if (!stats) {
+        statsTl.current.reverse(0);
+      }
     }
   }, [{ scope: cardRef.current }]);
 

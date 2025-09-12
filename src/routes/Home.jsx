@@ -6,24 +6,25 @@ import { useGSAP } from "@gsap/react";
 
 // components import
 import Loader from "../components/Loader";
+import Nav from "../components/Nav";
+import Divider from "../components/Divider";
 import Hero from "../components/Hero";
 import About from "../components/About";
 import Portfolio from "../components/Portfolio";
-import Nav from "../components/Nav";
 import CompCard from "../components/CompCard";
-import Divider from "../components/Divider";
+import Contact from "../components/Contact";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const homeABoutRef = useRef();
   const tl = useRef();
 
   const countDelay = 400;
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    // window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, []);
 
   useGSAP(() => {
@@ -62,11 +63,16 @@ const Home = () => {
             <About />
           </div>
 
-          <Divider text="Portfolio" />
-          <Portfolio />
+          <div className="other-sections-container">
+            <Divider text="Portfolio" />
+            <Portfolio />
 
-          <Divider text="Comp Card" />
-          <CompCard />
+            <Divider text="Comp Card" />
+            <CompCard />
+
+            {/* <Divider text="" /> */}
+            <Contact />
+          </div>
         </>
       )}
     </>

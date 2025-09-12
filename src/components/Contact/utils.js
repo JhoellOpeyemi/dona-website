@@ -3,19 +3,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const aboutAnimation = (tl) => {
-  gsap.set(".about-image", {
+export const contactAnimation = (tl) => {
+  gsap.set(".contact-image-container img", {
     clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
   });
+  gsap.set(".socials-container", { opacity: 0 });
 
   tl.current = gsap
     .timeline({
       scrollTrigger: {
-        trigger: ".about-content",
-        start: "clamp(top 80%)",
+        trigger: ".contact-content",
+        start: "clamp(top 70%)",
       },
     })
-    .from(".section-heading .char", {
+    .from(".contact-heading .section-heading .char", {
       y: "100%",
       duration: 1,
       ease: "power4.out",
@@ -25,7 +26,7 @@ export const aboutAnimation = (tl) => {
       },
     })
     .to(
-      ".about-image",
+      ".contact-image-container img",
       {
         clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
         duration: 1,
@@ -38,7 +39,7 @@ export const aboutAnimation = (tl) => {
       "<+0.5"
     )
     .from(
-      ".about-text p .word",
+      [".contact-text-intro .word", ".contact-text .word"],
       {
         y: "100%",
         opacity: 0,
@@ -50,5 +51,6 @@ export const aboutAnimation = (tl) => {
         },
       },
       "-=0.6"
-    );
+    )
+    .to(".socials-container", { opacity: 1, duration: 0.75 });
 };

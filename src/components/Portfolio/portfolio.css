@@ -2,7 +2,9 @@
   position: relative;
   width: 100%;
   height: 100vh;
+  height: 100svh;
   background-color: var(--light-bg-color);
+  z-index: 2;
   display: flex;
   align-items: flex-end;
   padding: 0 0 0.5rem 0;
@@ -26,6 +28,7 @@
   position: relative;
   width: 100%;
   height: min(70vh, 40.625rem);
+  height: min(70svh, 40.625rem);
   overflow: hidden;
 }
 
@@ -66,6 +69,7 @@
 .image-thumbnail {
   width: 100%;
   height: min(15vh, 9.375rem);
+  height: min(15svh, 9.375rem);
 }
 
 .image-thumbnail-btn {
@@ -162,10 +166,12 @@
 
   .main-image {
     height: min(60vh, 34rem);
+    height: min(60svh, 34rem);
   }
 
   .image-thumbnail {
     height: min(10vh, 7rem);
+    height: min(10svh, 7rem);
   }
 
   .image-tags {

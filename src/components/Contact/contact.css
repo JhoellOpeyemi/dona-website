@@ -1,0 +1,176 @@
+.contact-section {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  background-color: var(--bg-color);
+  color: var(--white);
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.contact-content {
+  position: relative;
+  height: 80vh;
+  height: 80svh;
+}
+
+.contact-details-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+}
+
+.contact-text-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+}
+
+.contact-text-intro {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.contact-links-container {
+  display: flex;
+  width: 100%;
+  height: 60%;
+  align-items: flex-end;
+  gap: 1.75rem;
+}
+
+.contact-image-container {
+  width: 100%;
+  height: 100%;
+}
+
+.socials-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  gap: 2rem;
+}
+
+.socials {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  width: 100%;
+}
+
+.social img {
+  width: 24px;
+  height: auto;
+  /* opacity: 0.75; */
+  transition: all 250ms ease-out;
+}
+
+.social:hover img {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.other-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.other-link {
+  position: relative;
+  font: var(--heading-five);
+}
+
+.other-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0.125rem;
+  background: var(--light-bg-color);
+  transition: width 250ms ease-out;
+}
+
+.other-link:hover::before {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .contact-section {
+    /* height: fit-content; */
+    display: block;
+    padding-top: 2rem;
+  }
+
+  .contact-content {
+    height: 100%;
+  }
+
+  .contact-details-container {
+    position: relative;
+    display: flex;
+    height: 100%;
+    gap: 3rem;
+    margin-top: 2.5rem;
+  }
+
+  .contact-text-container {
+    position: relative;
+    width: 95%;
+    text-align: center;
+    align-self: center;
+  }
+
+  .contact-links-container {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    height: fit-content;
+    gap: 1rem;
+  }
+
+  .contact-image-container {
+    width: 100%;
+    height: 30vh;
+    height: 30svh;
+  }
+
+  .socials-container {
+    align-items: center;
+    gap: 3.75rem;
+  }
+
+  .socials {
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  .social img {
+    width: 20px;
+  }
+
+  .other-links {
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .copyright {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}

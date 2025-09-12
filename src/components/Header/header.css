@@ -38,7 +38,7 @@
   width: 0%;
   height: 0.125rem;
   background-color: var(--text-color);
-  transition: width 250ms ease-in;
+  transition: width 250ms ease-out;
 }
 
 .nav-link.active {
