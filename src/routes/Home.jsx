@@ -17,14 +17,14 @@ import Contact from "../components/Contact";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const homeABoutRef = useRef();
   const tl = useRef();
 
   const countDelay = 400;
 
   useEffect(() => {
-    // window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, []);
 
   useGSAP(() => {
