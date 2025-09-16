@@ -39,11 +39,11 @@ const About = () => {
         <div className="about-content">
           <div className="about-text">
             <p>
-              Lorem ipsum dolor sit amet consectetur. Id duis donec nibh orci
-              ultrices. Gravida quis tempor sit dictum eleifend volutpat ut
-              convallis enim. Sit massa erat enim lectus. Vel ultricies leo amet
-              in pellentesque cursus. Ac quisque at imperdiet et amet elementum
-              commodo. Nec nulla eu enim rhoncus cras et.
+              I'm a young and passionate model building my journey in fashion
+              and creativity. My work reflects confidence, versatility, and a
+              love for storytelling through style and expression. From portraits
+              to editorial shoots, I bring energy and authenticity to every
+              project, always eager to grow and collaborate.
             </p>
           </div>
 

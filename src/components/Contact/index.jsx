@@ -83,7 +83,7 @@ const Contact = () => {
                   </div>
                   <div className="other-links">
                     <a href="" className="phone other-link">
-                      +2349053888888
+                      +2349070613061
                     </a>
 
                     <a
